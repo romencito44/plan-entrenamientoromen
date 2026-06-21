@@ -1,2 +1,8 @@
 # Plan de otra persona (datos privados de Andrea, no se sube al repo)
 Plan entreno andrea/
+
+# Archivos internos de Claude Code (instrucciones/skills del kit, no forman
+# parte del sitio publicado): se quedan en local pero no se suben a GitHub
+CLAUDE.md
+INSTRUCCIONES.md
+.claude/

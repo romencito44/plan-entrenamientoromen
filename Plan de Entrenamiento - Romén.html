@@ -44,18 +44,14 @@
   @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
   #tab-resumen:checked ~ main #resumen,
-  #tab-rotacion:checked ~ main #rotacion,
-  #tab-torso:checked ~ main #torso,
-  #tab-pierna:checked ~ main #pierna,
-  #tab-brazo:checked ~ main #brazo,
+  #tab-meso1:checked ~ main #meso1,
+  #tab-meso2:checked ~ main #meso2,
   #tab-cardio:checked ~ main #cardio,
   #tab-volumen:checked ~ main #volumen { display: block; animation: fadeIn .2s ease; }
 
   #tab-resumen:checked ~ nav label[for="tab-resumen"],
-  #tab-rotacion:checked ~ nav label[for="tab-rotacion"],
-  #tab-torso:checked ~ nav label[for="tab-torso"],
-  #tab-pierna:checked ~ nav label[for="tab-pierna"],
-  #tab-brazo:checked ~ nav label[for="tab-brazo"],
+  #tab-meso1:checked ~ nav label[for="tab-meso1"],
+  #tab-meso2:checked ~ nav label[for="tab-meso2"],
   #tab-cardio:checked ~ nav label[for="tab-cardio"],
   #tab-volumen:checked ~ nav label[for="tab-volumen"] { color: #fff; background: var(--teal); }
 
@@ -83,7 +79,7 @@
   .micro-title { background: var(--teal); color: #fff; font-weight: 700; font-size: 0.95rem; padding: 12px 16px; letter-spacing: .05em; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
   .micro-title.descarga { background: var(--warm); }
   .micro-table thead th { background: #fff; color: var(--text); font-weight: 700; padding: 10px 14px; border-bottom: 2px solid var(--border); font-size: 0.72rem; text-transform: uppercase; letter-spacing: .05em; text-align: center; }
-  .micro-table thead th:nth-child(1) { text-align: left; }
+  .micro-table thead th:nth-child(2) { text-align: left; }
   .micro-table tbody td { padding: 9px 14px; font-size: 0.85rem; color: #fff; text-align: center; border-bottom: 1px solid rgba(255,255,255,.12); }
   .micro-table tbody tr.data-row td { background: var(--teal); }
   .micro-table tbody tr.data-row:hover td { background: var(--teal-dark); }
@@ -107,13 +103,16 @@
     .micro-table thead { display: none; }
     .micro-table tbody tr.data-row { display: block; padding: 12px 14px 14px; }
     .micro-table tbody tr.data-row td { display: block; text-align: left; border: none; padding: 2px 0; }
-    .micro-table tbody tr.data-row td:nth-of-type(2),
-    .micro-table tbody tr.data-row td:nth-of-type(3),
-    .micro-table tbody tr.data-row td:nth-of-type(4) { display: inline-block; margin-right: 18px; font-size: 0.85rem; }
-    .micro-table tbody tr.data-row td:nth-of-type(2)::before { content: "Series: "; opacity: .65; }
-    .micro-table tbody tr.data-row td:nth-of-type(3)::before { content: "Repes: "; opacity: .65; }
-    .micro-table tbody tr.data-row td:nth-of-type(4)::before { content: "RIR: "; opacity: .65; }
+    .micro-table tbody tr.data-row td:nth-last-of-type(5),
+    .micro-table tbody tr.data-row td:nth-last-of-type(4),
+    .micro-table tbody tr.data-row td:nth-last-of-type(3) { display: inline-block; margin-right: 18px; font-size: 0.85rem; }
+    .micro-table tbody tr.data-row td:nth-last-of-type(5)::before { content: "Series: "; opacity: .65; }
+    .micro-table tbody tr.data-row td:nth-last-of-type(4)::before { content: "Repes: "; opacity: .65; }
+    .micro-table tbody tr.data-row td:nth-last-of-type(3)::before { content: "RIR: "; opacity: .65; }
+    .micro-table tbody td.day-cell { padding-bottom: 8px; }
+    .micro-table tbody td.peso-cell { padding-top: 8px; }
     .micro-table tbody td.peso-cell input.peso { width: 100%; }
+    .micro-table tbody tr.day-sep { display: block; }
   }
 
   h2 { font-size: 1.05rem; margin: 0 0 14px; font-weight: 700; }
@@ -123,10 +122,8 @@
 <body>
 
 <input type="radio" name="tabs" id="tab-resumen" class="tab-radio" checked>
-<input type="radio" name="tabs" id="tab-rotacion" class="tab-radio">
-<input type="radio" name="tabs" id="tab-torso" class="tab-radio">
-<input type="radio" name="tabs" id="tab-pierna" class="tab-radio">
-<input type="radio" name="tabs" id="tab-brazo" class="tab-radio">
+<input type="radio" name="tabs" id="tab-meso1" class="tab-radio">
+<input type="radio" name="tabs" id="tab-meso2" class="tab-radio">
 <input type="radio" name="tabs" id="tab-cardio" class="tab-radio">
 <input type="radio" name="tabs" id="tab-volumen" class="tab-radio">
 
@@ -135,7 +132,7 @@
     <div class="icon">🏋️</div>
     <div>
       <h1>Plan de Entrenamiento</h1>
-      <p>Romén · Torso / Pierna / Brazo con rotación · 5 días/semana + cardio</p>
+      <p>Romén · Día 1 Torso · Día 2 Pierna · Día 3 Brazo · 5 días/semana + cardio</p>
     </div>
   </div>
   <div class="actions">
@@ -147,10 +144,8 @@
 
 <nav class="tabs">
   <label class="tab-btn" for="tab-resumen">📊 Resumen</label>
-  <label class="tab-btn" for="tab-rotacion">🔄 Rotación</label>
-  <label class="tab-btn" for="tab-torso">Torso</label>
-  <label class="tab-btn" for="tab-pierna">Pierna</label>
-  <label class="tab-btn" for="tab-brazo">Brazo</label>
+  <label class="tab-btn" for="tab-meso1">Mesociclo 1</label>
+  <label class="tab-btn" for="tab-meso2">Mesociclo 2</label>
   <label class="tab-btn" for="tab-cardio">🏃 Cardio</label>
   <label class="tab-btn" for="tab-volumen">📦 Volumen</label>
 </nav>
@@ -164,12 +159,12 @@
     </div>
     <div class="card resumen-grid">
       <div class="item"><span>Para quién</span>Romén</div>
-      <div class="item"><span>Tipo de programa</span>Torso/Pierna/Brazo con rotación (tu programa, digitalizado desde Excel)</div>
-      <div class="item"><span>Frecuencia</span>5 días/semana entrenando (rotando) + 2 días libres a tu elección</div>
+      <div class="item"><span>Tipo de programa</span>Torso/Pierna/Brazo en ciclo fijo (tu programa, digitalizado desde Excel)</div>
+      <div class="item"><span>Frecuencia</span>Día 1 Torso · Día 2 Pierna · Día 3 Brazo, repitiendo el ciclo cada vez que entrenas (sin reiniciar en lunes) + 2 días libres a tu elección</div>
       <div class="item"><span>Frecuencia por grupo</span>~1,67x por grupo muscular/semana</div>
-      <div class="item"><span>Estructura</span>5 microciclos (RIR 2·2·1·1·0) + 1 semana de descarga (RIR 2), cada 5-6 semanas</div>
+      <div class="item"><span>Estructura</span>2 mesociclos (Mesociclo 1 = microciclos 1-3, Mesociclo 2 = microciclos 4-5 + descarga). RIR por microciclo: 2·2·1·1·0·(descarga 2)</div>
       <div class="item"><span>Método</span>Top set + back-off en compuestos principales · doble progresión</div>
-      <div class="item wide"><span>Rotación semanal</span>El orden Torso/Pierna/Brazo no va por día fijo de la semana: haces el siguiente entreno del ciclo cada vez que entrenas, sin reiniciar en lunes. En bloques de 3 semanas cada sesión cae 5 veces, manteniendo la frecuencia pareja. Calendario completo en la pestaña 🔄 Rotación.</div>
+      <div class="item wide"><span>Cómo avanzar de microciclo a microciclo</span>Cada vez que completes una vuelta entera Día 1-2-3 (Torso-Pierna-Brazo), pasas al siguiente microciclo de la tabla. Como entrenas 5 días/semana, cada microciclo dura aproximadamente 1 semana (con alguna sesión repetida); no hace falta hacerlo coincidir con el calendario.</div>
       <div class="item wide"><span>Excepción en el Microciclo 5</span>Con el RIR general en 0, los top sets pesados de Sentadilla, Peso muerto rumano, Press inclinado y Remo se quedan en RIR 1; el RIR 0 se reserva para máquinas y aislamiento (incluidos los back-off de esos mismos ejercicios).</div>
     </div>
     <div class="card" style="border-left: 4px solid var(--warm); background: #FFF8F0;">
@@ -179,46 +174,23 @@
     </div>
   </section>
 
-  <section id="rotacion" class="tab-content">
+  <section id="meso1" class="tab-content">
     <div class="card">
-      <h2>Cómo rotar (la clave para la frecuencia)</h2>
-      <p>Haz el siguiente entreno del ciclo cada día que entrenes; descansa cuando lo necesites (2 días libres a tu gusto). <strong>No reinicies en lunes.</strong> Así, en bloques de 3 semanas cada sesión cae 5 veces y la frecuencia queda pareja (~1,67x por grupo/semana, dentro del rango ideal de hipertrofia).</p>
+      <h2>Mesociclo 1 · Acumulación</h2>
+      <p style="margin:0;">Microciclos 1 a 3. RIR por microciclo: 2 · 2 · 1. Cada microciclo es una vuelta completa Día 1 (Torso) → Día 2 (Pierna) → Día 3 (Brazo).</p>
     </div>
-    <div class="table-wrap">
-      <table class="simple">
-        <thead><tr><th>Semana</th><th>Día 1</th><th>Día 2</th><th>Día 3</th><th>Día 4</th><th>Día 5</th></tr></thead>
-        <tbody>
-          <tr><td>Semana 1</td><td>TORSO</td><td>PIERNA</td><td>BRAZO</td><td>TORSO</td><td>PIERNA</td></tr>
-          <tr><td>Semana 2</td><td>BRAZO</td><td>TORSO</td><td>PIERNA</td><td>BRAZO</td><td>TORSO</td></tr>
-          <tr><td>Semana 3</td><td>PIERNA</td><td>BRAZO</td><td>TORSO</td><td>PIERNA</td><td>BRAZO</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="card">
-      <p style="margin:0;">Tras la Semana 3 el patrón se repite. Cada 5-6 semanas mete una semana de <strong>DESCARGA</strong> (la última tabla de cada pestaña de grupo muscular).</p>
-    </div>
-    <div class="card">
-      <h2>Frecuencia y alternativa</h2>
-      <p>5 días rotando = ~1,67x por grupo/semana. Perfecto para hipertrofia. Los brazos, además, suman trabajo indirecto en el día de Torso (presses y remos).</p>
-      <p style="margin-bottom:0;">¿Quieres 2x exacto a todo? Añade un 6º día y queda T-P-B-T-P-B fijo. Es el único modo de clavar el 2x en los tres entrenos.</p>
-    </div>
-    <div class="card">
-      <h2>Ejecución</h2>
-      <p>Top set + back-off como ya hacías. RIR por microciclo: 2 · 2 · 1 · 1 · 0 · (descarga 2).</p>
-      <p>En el microciclo 5 (RIR 0), deja los top sets pesados de compuestos (sentadilla, RDL, press incl., remo) en RIR 1; el RIR 0 resérvalo para máquinas/aislamiento.</p>
-      <p>Doble progresión: clava el rango a tu RIR objetivo y sube carga al microciclo siguiente.</p>
-      <p>El día de Brazo es de baja fatiga sistémica: colócalo bien para que no choque con Torso pesado pegado.</p>
-      <p style="margin-bottom:0;">Celdas "Pesos x reps" en blanco para registrar; copia las cargas que ya conoces.</p>
-    </div>
-  </section>
 
-  <section id="torso" class="tab-content">
     <div class="micro-table">
-      <div class="micro-title">MICROCICLO 1 <label class="sesion-check"><input type="checkbox" class="sesion" data-key="torso-mc1-completado"> Completado</label></div>
+      <div class="micro-title">MICROCICLO 1</div>
       <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
+        <thead><tr><th>DÍA</th><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
         <tbody>
-          <tr class="data-row"><td class="ex-cell">Press inclinado MP</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-mc1" placeholder="kg x reps"></td><td>Top set · fuerza pecho</td></tr>
+          <tr class="data-row">
+            <td class="day-cell" rowspan="11">Día 1 (Torso)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="torso-mc1-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Press inclinado MP</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-mc1" placeholder="kg x reps"></td><td>Top set · fuerza pecho</td>
+          </tr>
           <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-backoff-mc1" placeholder="kg x reps"></td><td>Back-off</td></tr>
           <tr class="data-row"><td class="ex-cell">Remo máquina Hammer / polea baja</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-mc1" placeholder="kg x reps"></td><td>Top set · fuerza espalda</td></tr>
           <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-backoff-mc1" placeholder="kg x reps"></td><td>Back-off</td></tr>
@@ -229,118 +201,14 @@
           <tr class="data-row"><td class="ex-cell">Elevaciones laterales en polea</td><td>3</td><td>12-15</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-elevaciones-laterales-polea-mc1" placeholder="kg x reps"></td><td>Deltoides lateral</td></tr>
           <tr class="data-row"><td class="ex-cell">Pájaros / reverse peck deck</td><td>3</td><td>12-15</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pajaros-reverse-peck-deck-mc1" placeholder="kg x reps"></td><td>Deltoides posterior</td></tr>
           <tr class="data-row"><td class="ex-cell">Press hombro en máquina</td><td>2</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-hombro-maquina-mc1" placeholder="kg x reps"></td><td>Opcional · deltoides anterior</td></tr>
-        </tbody>
-      </table>
-    </div>
+          <tr class="day-sep"><td colspan="7"></td></tr>
 
-    <div class="micro-table">
-      <div class="micro-title">MICROCICLO 2 <label class="sesion-check"><input type="checkbox" class="sesion" data-key="torso-mc2-completado"> Completado</label></div>
-      <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
-        <tbody>
-          <tr class="data-row"><td class="ex-cell">Press inclinado MP</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-mc2" placeholder="kg x reps"></td><td>Top set · fuerza pecho</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-backoff-mc2" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Remo máquina Hammer / polea baja</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-mc2" placeholder="kg x reps"></td><td>Top set · fuerza espalda</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-backoff-mc2" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Press plano en máquina</td><td>3</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-plano-maquina-mc2" placeholder="kg x reps"></td><td>Pecho</td></tr>
-          <tr class="data-row"><td class="ex-cell">Jalón agarre neutro</td><td>3</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-jalon-agarre-neutro-mc2" placeholder="kg x reps"></td><td>Espalda</td></tr>
-          <tr class="data-row"><td class="ex-cell">Peck deck</td><td>2</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-peck-deck-mc2" placeholder="kg x reps"></td><td>Pecho</td></tr>
-          <tr class="data-row"><td class="ex-cell">Pullover en polea</td><td>2</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pullover-polea-mc2" placeholder="kg x reps"></td><td>Dorsal</td></tr>
-          <tr class="data-row"><td class="ex-cell">Elevaciones laterales en polea</td><td>3</td><td>12-15</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-elevaciones-laterales-polea-mc2" placeholder="kg x reps"></td><td>Deltoides lateral</td></tr>
-          <tr class="data-row"><td class="ex-cell">Pájaros / reverse peck deck</td><td>3</td><td>12-15</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pajaros-reverse-peck-deck-mc2" placeholder="kg x reps"></td><td>Deltoides posterior</td></tr>
-          <tr class="data-row"><td class="ex-cell">Press hombro en máquina</td><td>2</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-hombro-maquina-mc2" placeholder="kg x reps"></td><td>Opcional · deltoides anterior</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="micro-table">
-      <div class="micro-title">MICROCICLO 3 <label class="sesion-check"><input type="checkbox" class="sesion" data-key="torso-mc3-completado"> Completado</label></div>
-      <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
-        <tbody>
-          <tr class="data-row"><td class="ex-cell">Press inclinado MP</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-mc3" placeholder="kg x reps"></td><td>Top set · fuerza pecho</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-backoff-mc3" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Remo máquina Hammer / polea baja</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-mc3" placeholder="kg x reps"></td><td>Top set · fuerza espalda</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-backoff-mc3" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Press plano en máquina</td><td>3</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-plano-maquina-mc3" placeholder="kg x reps"></td><td>Pecho</td></tr>
-          <tr class="data-row"><td class="ex-cell">Jalón agarre neutro</td><td>3</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-jalon-agarre-neutro-mc3" placeholder="kg x reps"></td><td>Espalda</td></tr>
-          <tr class="data-row"><td class="ex-cell">Peck deck</td><td>2</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-peck-deck-mc3" placeholder="kg x reps"></td><td>Pecho</td></tr>
-          <tr class="data-row"><td class="ex-cell">Pullover en polea</td><td>2</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pullover-polea-mc3" placeholder="kg x reps"></td><td>Dorsal</td></tr>
-          <tr class="data-row"><td class="ex-cell">Elevaciones laterales en polea</td><td>3</td><td>12-15</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-elevaciones-laterales-polea-mc3" placeholder="kg x reps"></td><td>Deltoides lateral</td></tr>
-          <tr class="data-row"><td class="ex-cell">Pájaros / reverse peck deck</td><td>3</td><td>12-15</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pajaros-reverse-peck-deck-mc3" placeholder="kg x reps"></td><td>Deltoides posterior</td></tr>
-          <tr class="data-row"><td class="ex-cell">Press hombro en máquina</td><td>2</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-hombro-maquina-mc3" placeholder="kg x reps"></td><td>Opcional · deltoides anterior</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="micro-table">
-      <div class="micro-title">MICROCICLO 4 <label class="sesion-check"><input type="checkbox" class="sesion" data-key="torso-mc4-completado"> Completado</label></div>
-      <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
-        <tbody>
-          <tr class="data-row"><td class="ex-cell">Press inclinado MP</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-mc4" placeholder="kg x reps"></td><td>Top set · fuerza pecho</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-backoff-mc4" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Remo máquina Hammer / polea baja</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-mc4" placeholder="kg x reps"></td><td>Top set · fuerza espalda</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-backoff-mc4" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Press plano en máquina</td><td>3</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-plano-maquina-mc4" placeholder="kg x reps"></td><td>Pecho</td></tr>
-          <tr class="data-row"><td class="ex-cell">Jalón agarre neutro</td><td>3</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-jalon-agarre-neutro-mc4" placeholder="kg x reps"></td><td>Espalda</td></tr>
-          <tr class="data-row"><td class="ex-cell">Peck deck</td><td>2</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-peck-deck-mc4" placeholder="kg x reps"></td><td>Pecho</td></tr>
-          <tr class="data-row"><td class="ex-cell">Pullover en polea</td><td>2</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pullover-polea-mc4" placeholder="kg x reps"></td><td>Dorsal</td></tr>
-          <tr class="data-row"><td class="ex-cell">Elevaciones laterales en polea</td><td>3</td><td>12-15</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-elevaciones-laterales-polea-mc4" placeholder="kg x reps"></td><td>Deltoides lateral</td></tr>
-          <tr class="data-row"><td class="ex-cell">Pájaros / reverse peck deck</td><td>3</td><td>12-15</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pajaros-reverse-peck-deck-mc4" placeholder="kg x reps"></td><td>Deltoides posterior</td></tr>
-          <tr class="data-row"><td class="ex-cell">Press hombro en máquina</td><td>2</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-hombro-maquina-mc4" placeholder="kg x reps"></td><td>Opcional · deltoides anterior</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="micro-table">
-      <div class="micro-title">MICROCICLO 5 <label class="sesion-check"><input type="checkbox" class="sesion" data-key="torso-mc5-completado"> Completado</label></div>
-      <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
-        <tbody>
-          <tr class="data-row"><td class="ex-cell">Press inclinado MP</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-mc5" placeholder="kg x reps"></td><td>Top set · fuerza pecho (excepción: RIR 1)</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-backoff-mc5" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Remo máquina Hammer / polea baja</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-mc5" placeholder="kg x reps"></td><td>Top set · fuerza espalda (excepción: RIR 1)</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-backoff-mc5" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Press plano en máquina</td><td>3</td><td>8-10</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-plano-maquina-mc5" placeholder="kg x reps"></td><td>Pecho</td></tr>
-          <tr class="data-row"><td class="ex-cell">Jalón agarre neutro</td><td>3</td><td>8-10</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-jalon-agarre-neutro-mc5" placeholder="kg x reps"></td><td>Espalda</td></tr>
-          <tr class="data-row"><td class="ex-cell">Peck deck</td><td>2</td><td>10-12</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-peck-deck-mc5" placeholder="kg x reps"></td><td>Pecho</td></tr>
-          <tr class="data-row"><td class="ex-cell">Pullover en polea</td><td>2</td><td>10-12</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pullover-polea-mc5" placeholder="kg x reps"></td><td>Dorsal</td></tr>
-          <tr class="data-row"><td class="ex-cell">Elevaciones laterales en polea</td><td>3</td><td>12-15</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-elevaciones-laterales-polea-mc5" placeholder="kg x reps"></td><td>Deltoides lateral</td></tr>
-          <tr class="data-row"><td class="ex-cell">Pájaros / reverse peck deck</td><td>3</td><td>12-15</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pajaros-reverse-peck-deck-mc5" placeholder="kg x reps"></td><td>Deltoides posterior</td></tr>
-          <tr class="data-row"><td class="ex-cell">Press hombro en máquina</td><td>2</td><td>8-10</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-hombro-maquina-mc5" placeholder="kg x reps"></td><td>Opcional · deltoides anterior</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="micro-table">
-      <div class="micro-title descarga">DESCARGA <label class="sesion-check"><input type="checkbox" class="sesion" data-key="torso-descarga-completado"> Completado</label></div>
-      <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
-        <tbody>
-          <tr class="data-row"><td class="ex-cell">Press inclinado MP</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-descarga" placeholder="kg x reps"></td><td>Top set · fuerza pecho</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-backoff-descarga" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Remo máquina Hammer / polea baja</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-descarga" placeholder="kg x reps"></td><td>Top set · fuerza espalda</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-backoff-descarga" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Press plano en máquina</td><td>3</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-plano-maquina-descarga" placeholder="kg x reps"></td><td>Pecho</td></tr>
-          <tr class="data-row"><td class="ex-cell">Jalón agarre neutro</td><td>3</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-jalon-agarre-neutro-descarga" placeholder="kg x reps"></td><td>Espalda</td></tr>
-          <tr class="data-row"><td class="ex-cell">Peck deck</td><td>2</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-peck-deck-descarga" placeholder="kg x reps"></td><td>Pecho</td></tr>
-          <tr class="data-row"><td class="ex-cell">Pullover en polea</td><td>2</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pullover-polea-descarga" placeholder="kg x reps"></td><td>Dorsal</td></tr>
-          <tr class="data-row"><td class="ex-cell">Elevaciones laterales en polea</td><td>3</td><td>12-15</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-elevaciones-laterales-polea-descarga" placeholder="kg x reps"></td><td>Deltoides lateral</td></tr>
-          <tr class="data-row"><td class="ex-cell">Pájaros / reverse peck deck</td><td>3</td><td>12-15</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pajaros-reverse-peck-deck-descarga" placeholder="kg x reps"></td><td>Deltoides posterior</td></tr>
-          <tr class="data-row"><td class="ex-cell">Press hombro en máquina</td><td>2</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-hombro-maquina-descarga" placeholder="kg x reps"></td><td>Opcional · deltoides anterior</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section id="pierna" class="tab-content">
-    <div class="micro-table">
-      <div class="micro-title">MICROCICLO 1 <label class="sesion-check"><input type="checkbox" class="sesion" data-key="pierna-mc1-completado"> Completado</label></div>
-      <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
-        <tbody>
-          <tr class="data-row"><td class="ex-cell">Sentadilla en multipower</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-mc1" placeholder="kg x reps"></td><td>Top set · fuerza</td></tr>
+          <tr class="data-row">
+            <td class="day-cell" rowspan="9">Día 2 (Pierna)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="pierna-mc1-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Sentadilla en multipower</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-mc1" placeholder="kg x reps"></td><td>Top set · fuerza</td>
+          </tr>
           <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-backoff-mc1" placeholder="kg x reps"></td><td>Back-off</td></tr>
           <tr class="data-row"><td class="ex-cell">Peso muerto rumano MP</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-mc1" placeholder="kg x reps"></td><td>Top set · fuerza posterior</td></tr>
           <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-backoff-mc1" placeholder="kg x reps"></td><td>Back-off</td></tr>
@@ -349,108 +217,14 @@
           <tr class="data-row"><td class="ex-cell">Adductor</td><td>2</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-adductor-mc1" placeholder="kg x reps"></td><td>—</td></tr>
           <tr class="data-row"><td class="ex-cell">Gemelo (alterna sentado / de pie)</td><td>3</td><td>10-20</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-gemelo-mc1" placeholder="kg x reps"></td><td>Sóleo / gastrocnemio</td></tr>
           <tr class="data-row"><td class="ex-cell">Pallof press o crunch en polea</td><td>2</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-pallof-press-crunch-polea-mc1" placeholder="kg x reps"></td><td>Core</td></tr>
-        </tbody>
-      </table>
-    </div>
+          <tr class="day-sep"><td colspan="7"></td></tr>
 
-    <div class="micro-table">
-      <div class="micro-title">MICROCICLO 2 <label class="sesion-check"><input type="checkbox" class="sesion" data-key="pierna-mc2-completado"> Completado</label></div>
-      <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
-        <tbody>
-          <tr class="data-row"><td class="ex-cell">Sentadilla en multipower</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-mc2" placeholder="kg x reps"></td><td>Top set · fuerza</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-backoff-mc2" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Peso muerto rumano MP</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-mc2" placeholder="kg x reps"></td><td>Top set · fuerza posterior</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-backoff-mc2" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Extensión de cuádriceps</td><td>3</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-extension-cuadriceps-mc2" placeholder="kg x reps"></td><td>Cuádriceps</td></tr>
-          <tr class="data-row"><td class="ex-cell">Femoral tumbado o sentado</td><td>3</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-femoral-tumbado-sentado-mc2" placeholder="kg x reps"></td><td>Femoral</td></tr>
-          <tr class="data-row"><td class="ex-cell">Adductor</td><td>2</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-adductor-mc2" placeholder="kg x reps"></td><td>—</td></tr>
-          <tr class="data-row"><td class="ex-cell">Gemelo (alterna sentado / de pie)</td><td>3</td><td>10-20</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-gemelo-mc2" placeholder="kg x reps"></td><td>Sóleo / gastrocnemio</td></tr>
-          <tr class="data-row"><td class="ex-cell">Pallof press o crunch en polea</td><td>2</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-pallof-press-crunch-polea-mc2" placeholder="kg x reps"></td><td>Core</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="micro-table">
-      <div class="micro-title">MICROCICLO 3 <label class="sesion-check"><input type="checkbox" class="sesion" data-key="pierna-mc3-completado"> Completado</label></div>
-      <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
-        <tbody>
-          <tr class="data-row"><td class="ex-cell">Sentadilla en multipower</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-mc3" placeholder="kg x reps"></td><td>Top set · fuerza</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-backoff-mc3" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Peso muerto rumano MP</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-mc3" placeholder="kg x reps"></td><td>Top set · fuerza posterior</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-backoff-mc3" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Extensión de cuádriceps</td><td>3</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-extension-cuadriceps-mc3" placeholder="kg x reps"></td><td>Cuádriceps</td></tr>
-          <tr class="data-row"><td class="ex-cell">Femoral tumbado o sentado</td><td>3</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-femoral-tumbado-sentado-mc3" placeholder="kg x reps"></td><td>Femoral</td></tr>
-          <tr class="data-row"><td class="ex-cell">Adductor</td><td>2</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-adductor-mc3" placeholder="kg x reps"></td><td>—</td></tr>
-          <tr class="data-row"><td class="ex-cell">Gemelo (alterna sentado / de pie)</td><td>3</td><td>10-20</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-gemelo-mc3" placeholder="kg x reps"></td><td>Sóleo / gastrocnemio</td></tr>
-          <tr class="data-row"><td class="ex-cell">Pallof press o crunch en polea</td><td>2</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-pallof-press-crunch-polea-mc3" placeholder="kg x reps"></td><td>Core</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="micro-table">
-      <div class="micro-title">MICROCICLO 4 <label class="sesion-check"><input type="checkbox" class="sesion" data-key="pierna-mc4-completado"> Completado</label></div>
-      <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
-        <tbody>
-          <tr class="data-row"><td class="ex-cell">Sentadilla en multipower</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-mc4" placeholder="kg x reps"></td><td>Top set · fuerza</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-backoff-mc4" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Peso muerto rumano MP</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-mc4" placeholder="kg x reps"></td><td>Top set · fuerza posterior</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-backoff-mc4" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Extensión de cuádriceps</td><td>3</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-extension-cuadriceps-mc4" placeholder="kg x reps"></td><td>Cuádriceps</td></tr>
-          <tr class="data-row"><td class="ex-cell">Femoral tumbado o sentado</td><td>3</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-femoral-tumbado-sentado-mc4" placeholder="kg x reps"></td><td>Femoral</td></tr>
-          <tr class="data-row"><td class="ex-cell">Adductor</td><td>2</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-adductor-mc4" placeholder="kg x reps"></td><td>—</td></tr>
-          <tr class="data-row"><td class="ex-cell">Gemelo (alterna sentado / de pie)</td><td>3</td><td>10-20</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-gemelo-mc4" placeholder="kg x reps"></td><td>Sóleo / gastrocnemio</td></tr>
-          <tr class="data-row"><td class="ex-cell">Pallof press o crunch en polea</td><td>2</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-pallof-press-crunch-polea-mc4" placeholder="kg x reps"></td><td>Core</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="micro-table">
-      <div class="micro-title">MICROCICLO 5 <label class="sesion-check"><input type="checkbox" class="sesion" data-key="pierna-mc5-completado"> Completado</label></div>
-      <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
-        <tbody>
-          <tr class="data-row"><td class="ex-cell">Sentadilla en multipower</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-mc5" placeholder="kg x reps"></td><td>Top set · fuerza (excepción: RIR 1)</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-backoff-mc5" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Peso muerto rumano MP</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-mc5" placeholder="kg x reps"></td><td>Top set · fuerza posterior (excepción: RIR 1)</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-backoff-mc5" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Extensión de cuádriceps</td><td>3</td><td>10-12</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-extension-cuadriceps-mc5" placeholder="kg x reps"></td><td>Cuádriceps</td></tr>
-          <tr class="data-row"><td class="ex-cell">Femoral tumbado o sentado</td><td>3</td><td>10-12</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-femoral-tumbado-sentado-mc5" placeholder="kg x reps"></td><td>Femoral</td></tr>
-          <tr class="data-row"><td class="ex-cell">Adductor</td><td>2</td><td>8-10</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-adductor-mc5" placeholder="kg x reps"></td><td>—</td></tr>
-          <tr class="data-row"><td class="ex-cell">Gemelo (alterna sentado / de pie)</td><td>3</td><td>10-20</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-gemelo-mc5" placeholder="kg x reps"></td><td>Sóleo / gastrocnemio</td></tr>
-          <tr class="data-row"><td class="ex-cell">Pallof press o crunch en polea</td><td>2</td><td>10-12</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-pallof-press-crunch-polea-mc5" placeholder="kg x reps"></td><td>Core</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="micro-table">
-      <div class="micro-title descarga">DESCARGA <label class="sesion-check"><input type="checkbox" class="sesion" data-key="pierna-descarga-completado"> Completado</label></div>
-      <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
-        <tbody>
-          <tr class="data-row"><td class="ex-cell">Sentadilla en multipower</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-descarga" placeholder="kg x reps"></td><td>Top set · fuerza</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-backoff-descarga" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Peso muerto rumano MP</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-descarga" placeholder="kg x reps"></td><td>Top set · fuerza posterior</td></tr>
-          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-backoff-descarga" placeholder="kg x reps"></td><td>Back-off</td></tr>
-          <tr class="data-row"><td class="ex-cell">Extensión de cuádriceps</td><td>3</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-extension-cuadriceps-descarga" placeholder="kg x reps"></td><td>Cuádriceps</td></tr>
-          <tr class="data-row"><td class="ex-cell">Femoral tumbado o sentado</td><td>3</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-femoral-tumbado-sentado-descarga" placeholder="kg x reps"></td><td>Femoral</td></tr>
-          <tr class="data-row"><td class="ex-cell">Adductor</td><td>2</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-adductor-descarga" placeholder="kg x reps"></td><td>—</td></tr>
-          <tr class="data-row"><td class="ex-cell">Gemelo (alterna sentado / de pie)</td><td>3</td><td>10-20</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-gemelo-descarga" placeholder="kg x reps"></td><td>Sóleo / gastrocnemio</td></tr>
-          <tr class="data-row"><td class="ex-cell">Pallof press o crunch en polea</td><td>2</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-pallof-press-crunch-polea-descarga" placeholder="kg x reps"></td><td>Core</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section id="brazo" class="tab-content">
-    <div class="micro-table">
-      <div class="micro-title">MICROCICLO 1 <label class="sesion-check"><input type="checkbox" class="sesion" data-key="brazo-mc1-completado"> Completado</label></div>
-      <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
-        <tbody>
-          <tr class="data-row"><td class="ex-cell">Press cerrado o fondos en máquina</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-mc1" placeholder="kg x reps"></td><td>Top set · fuerza tríceps</td></tr>
+          <tr class="data-row">
+            <td class="day-cell" rowspan="10">Día 3 (Brazo)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="brazo-mc1-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Press cerrado o fondos en máquina</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-mc1" placeholder="kg x reps"></td><td>Top set · fuerza tríceps</td>
+          </tr>
           <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-backoff-mc1" placeholder="kg x reps"></td><td>Back-off</td></tr>
           <tr class="data-row"><td class="ex-cell">Curl predicador en máquina</td><td>3</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-curl-predicador-maquina-mc1" placeholder="kg x reps"></td><td>Bíceps (carga)</td></tr>
           <tr class="data-row"><td class="ex-cell">Extensión tríceps cuerda</td><td>3</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-extension-triceps-cuerda-mc1" placeholder="kg x reps"></td><td>—</td></tr>
@@ -465,11 +239,50 @@
     </div>
 
     <div class="micro-table">
-      <div class="micro-title">MICROCICLO 2 <label class="sesion-check"><input type="checkbox" class="sesion" data-key="brazo-mc2-completado"> Completado</label></div>
+      <div class="micro-title">MICROCICLO 2</div>
       <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
+        <thead><tr><th>DÍA</th><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
         <tbody>
-          <tr class="data-row"><td class="ex-cell">Press cerrado o fondos en máquina</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-mc2" placeholder="kg x reps"></td><td>Top set · fuerza tríceps</td></tr>
+          <tr class="data-row">
+            <td class="day-cell" rowspan="11">Día 1 (Torso)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="torso-mc2-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Press inclinado MP</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-mc2" placeholder="kg x reps"></td><td>Top set · fuerza pecho</td>
+          </tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-backoff-mc2" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Remo máquina Hammer / polea baja</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-mc2" placeholder="kg x reps"></td><td>Top set · fuerza espalda</td></tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-backoff-mc2" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Press plano en máquina</td><td>3</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-plano-maquina-mc2" placeholder="kg x reps"></td><td>Pecho</td></tr>
+          <tr class="data-row"><td class="ex-cell">Jalón agarre neutro</td><td>3</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-jalon-agarre-neutro-mc2" placeholder="kg x reps"></td><td>Espalda</td></tr>
+          <tr class="data-row"><td class="ex-cell">Peck deck</td><td>2</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-peck-deck-mc2" placeholder="kg x reps"></td><td>Pecho</td></tr>
+          <tr class="data-row"><td class="ex-cell">Pullover en polea</td><td>2</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pullover-polea-mc2" placeholder="kg x reps"></td><td>Dorsal</td></tr>
+          <tr class="data-row"><td class="ex-cell">Elevaciones laterales en polea</td><td>3</td><td>12-15</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-elevaciones-laterales-polea-mc2" placeholder="kg x reps"></td><td>Deltoides lateral</td></tr>
+          <tr class="data-row"><td class="ex-cell">Pájaros / reverse peck deck</td><td>3</td><td>12-15</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pajaros-reverse-peck-deck-mc2" placeholder="kg x reps"></td><td>Deltoides posterior</td></tr>
+          <tr class="data-row"><td class="ex-cell">Press hombro en máquina</td><td>2</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-hombro-maquina-mc2" placeholder="kg x reps"></td><td>Opcional · deltoides anterior</td></tr>
+          <tr class="day-sep"><td colspan="7"></td></tr>
+
+          <tr class="data-row">
+            <td class="day-cell" rowspan="9">Día 2 (Pierna)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="pierna-mc2-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Sentadilla en multipower</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-mc2" placeholder="kg x reps"></td><td>Top set · fuerza</td>
+          </tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-backoff-mc2" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Peso muerto rumano MP</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-mc2" placeholder="kg x reps"></td><td>Top set · fuerza posterior</td></tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-backoff-mc2" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Extensión de cuádriceps</td><td>3</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-extension-cuadriceps-mc2" placeholder="kg x reps"></td><td>Cuádriceps</td></tr>
+          <tr class="data-row"><td class="ex-cell">Femoral tumbado o sentado</td><td>3</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-femoral-tumbado-sentado-mc2" placeholder="kg x reps"></td><td>Femoral</td></tr>
+          <tr class="data-row"><td class="ex-cell">Adductor</td><td>2</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-adductor-mc2" placeholder="kg x reps"></td><td>—</td></tr>
+          <tr class="data-row"><td class="ex-cell">Gemelo (alterna sentado / de pie)</td><td>3</td><td>10-20</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-gemelo-mc2" placeholder="kg x reps"></td><td>Sóleo / gastrocnemio</td></tr>
+          <tr class="data-row"><td class="ex-cell">Pallof press o crunch en polea</td><td>2</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-pallof-press-crunch-polea-mc2" placeholder="kg x reps"></td><td>Core</td></tr>
+          <tr class="day-sep"><td colspan="7"></td></tr>
+
+          <tr class="data-row">
+            <td class="day-cell" rowspan="10">Día 3 (Brazo)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="brazo-mc2-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Press cerrado o fondos en máquina</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-mc2" placeholder="kg x reps"></td><td>Top set · fuerza tríceps</td>
+          </tr>
           <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-backoff-mc2" placeholder="kg x reps"></td><td>Back-off</td></tr>
           <tr class="data-row"><td class="ex-cell">Curl predicador en máquina</td><td>3</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-curl-predicador-maquina-mc2" placeholder="kg x reps"></td><td>Bíceps (carga)</td></tr>
           <tr class="data-row"><td class="ex-cell">Extensión tríceps cuerda</td><td>3</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-extension-triceps-cuerda-mc2" placeholder="kg x reps"></td><td>—</td></tr>
@@ -484,11 +297,50 @@
     </div>
 
     <div class="micro-table">
-      <div class="micro-title">MICROCICLO 3 <label class="sesion-check"><input type="checkbox" class="sesion" data-key="brazo-mc3-completado"> Completado</label></div>
+      <div class="micro-title">MICROCICLO 3</div>
       <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
+        <thead><tr><th>DÍA</th><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
         <tbody>
-          <tr class="data-row"><td class="ex-cell">Press cerrado o fondos en máquina</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-mc3" placeholder="kg x reps"></td><td>Top set · fuerza tríceps</td></tr>
+          <tr class="data-row">
+            <td class="day-cell" rowspan="11">Día 1 (Torso)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="torso-mc3-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Press inclinado MP</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-mc3" placeholder="kg x reps"></td><td>Top set · fuerza pecho</td>
+          </tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-backoff-mc3" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Remo máquina Hammer / polea baja</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-mc3" placeholder="kg x reps"></td><td>Top set · fuerza espalda</td></tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-backoff-mc3" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Press plano en máquina</td><td>3</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-plano-maquina-mc3" placeholder="kg x reps"></td><td>Pecho</td></tr>
+          <tr class="data-row"><td class="ex-cell">Jalón agarre neutro</td><td>3</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-jalon-agarre-neutro-mc3" placeholder="kg x reps"></td><td>Espalda</td></tr>
+          <tr class="data-row"><td class="ex-cell">Peck deck</td><td>2</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-peck-deck-mc3" placeholder="kg x reps"></td><td>Pecho</td></tr>
+          <tr class="data-row"><td class="ex-cell">Pullover en polea</td><td>2</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pullover-polea-mc3" placeholder="kg x reps"></td><td>Dorsal</td></tr>
+          <tr class="data-row"><td class="ex-cell">Elevaciones laterales en polea</td><td>3</td><td>12-15</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-elevaciones-laterales-polea-mc3" placeholder="kg x reps"></td><td>Deltoides lateral</td></tr>
+          <tr class="data-row"><td class="ex-cell">Pájaros / reverse peck deck</td><td>3</td><td>12-15</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pajaros-reverse-peck-deck-mc3" placeholder="kg x reps"></td><td>Deltoides posterior</td></tr>
+          <tr class="data-row"><td class="ex-cell">Press hombro en máquina</td><td>2</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-hombro-maquina-mc3" placeholder="kg x reps"></td><td>Opcional · deltoides anterior</td></tr>
+          <tr class="day-sep"><td colspan="7"></td></tr>
+
+          <tr class="data-row">
+            <td class="day-cell" rowspan="9">Día 2 (Pierna)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="pierna-mc3-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Sentadilla en multipower</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-mc3" placeholder="kg x reps"></td><td>Top set · fuerza</td>
+          </tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-backoff-mc3" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Peso muerto rumano MP</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-mc3" placeholder="kg x reps"></td><td>Top set · fuerza posterior</td></tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-backoff-mc3" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Extensión de cuádriceps</td><td>3</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-extension-cuadriceps-mc3" placeholder="kg x reps"></td><td>Cuádriceps</td></tr>
+          <tr class="data-row"><td class="ex-cell">Femoral tumbado o sentado</td><td>3</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-femoral-tumbado-sentado-mc3" placeholder="kg x reps"></td><td>Femoral</td></tr>
+          <tr class="data-row"><td class="ex-cell">Adductor</td><td>2</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-adductor-mc3" placeholder="kg x reps"></td><td>—</td></tr>
+          <tr class="data-row"><td class="ex-cell">Gemelo (alterna sentado / de pie)</td><td>3</td><td>10-20</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-gemelo-mc3" placeholder="kg x reps"></td><td>Sóleo / gastrocnemio</td></tr>
+          <tr class="data-row"><td class="ex-cell">Pallof press o crunch en polea</td><td>2</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-pallof-press-crunch-polea-mc3" placeholder="kg x reps"></td><td>Core</td></tr>
+          <tr class="day-sep"><td colspan="7"></td></tr>
+
+          <tr class="data-row">
+            <td class="day-cell" rowspan="10">Día 3 (Brazo)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="brazo-mc3-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Press cerrado o fondos en máquina</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-mc3" placeholder="kg x reps"></td><td>Top set · fuerza tríceps</td>
+          </tr>
           <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-backoff-mc3" placeholder="kg x reps"></td><td>Back-off</td></tr>
           <tr class="data-row"><td class="ex-cell">Curl predicador en máquina</td><td>3</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-curl-predicador-maquina-mc3" placeholder="kg x reps"></td><td>Bíceps (carga)</td></tr>
           <tr class="data-row"><td class="ex-cell">Extensión tríceps cuerda</td><td>3</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-extension-triceps-cuerda-mc3" placeholder="kg x reps"></td><td>—</td></tr>
@@ -501,13 +353,59 @@
         </tbody>
       </table>
     </div>
+  </section>
+
+  <section id="meso2" class="tab-content">
+    <div class="card">
+      <h2>Mesociclo 2 · Intensificación + Descarga</h2>
+      <p style="margin:0;">Microciclos 4 y 5, y semana de Descarga. RIR por microciclo: 1 · 0 · (descarga 2). En el Microciclo 5, los top sets de Sentadilla, Peso muerto rumano, Press inclinado y Remo se quedan en RIR 1 (excepción), no en RIR 0.</p>
+    </div>
 
     <div class="micro-table">
-      <div class="micro-title">MICROCICLO 4 <label class="sesion-check"><input type="checkbox" class="sesion" data-key="brazo-mc4-completado"> Completado</label></div>
+      <div class="micro-title">MICROCICLO 4</div>
       <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
+        <thead><tr><th>DÍA</th><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
         <tbody>
-          <tr class="data-row"><td class="ex-cell">Press cerrado o fondos en máquina</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-mc4" placeholder="kg x reps"></td><td>Top set · fuerza tríceps</td></tr>
+          <tr class="data-row">
+            <td class="day-cell" rowspan="11">Día 1 (Torso)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="torso-mc4-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Press inclinado MP</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-mc4" placeholder="kg x reps"></td><td>Top set · fuerza pecho</td>
+          </tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-backoff-mc4" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Remo máquina Hammer / polea baja</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-mc4" placeholder="kg x reps"></td><td>Top set · fuerza espalda</td></tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-backoff-mc4" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Press plano en máquina</td><td>3</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-plano-maquina-mc4" placeholder="kg x reps"></td><td>Pecho</td></tr>
+          <tr class="data-row"><td class="ex-cell">Jalón agarre neutro</td><td>3</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-jalon-agarre-neutro-mc4" placeholder="kg x reps"></td><td>Espalda</td></tr>
+          <tr class="data-row"><td class="ex-cell">Peck deck</td><td>2</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-peck-deck-mc4" placeholder="kg x reps"></td><td>Pecho</td></tr>
+          <tr class="data-row"><td class="ex-cell">Pullover en polea</td><td>2</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pullover-polea-mc4" placeholder="kg x reps"></td><td>Dorsal</td></tr>
+          <tr class="data-row"><td class="ex-cell">Elevaciones laterales en polea</td><td>3</td><td>12-15</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-elevaciones-laterales-polea-mc4" placeholder="kg x reps"></td><td>Deltoides lateral</td></tr>
+          <tr class="data-row"><td class="ex-cell">Pájaros / reverse peck deck</td><td>3</td><td>12-15</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pajaros-reverse-peck-deck-mc4" placeholder="kg x reps"></td><td>Deltoides posterior</td></tr>
+          <tr class="data-row"><td class="ex-cell">Press hombro en máquina</td><td>2</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-hombro-maquina-mc4" placeholder="kg x reps"></td><td>Opcional · deltoides anterior</td></tr>
+          <tr class="day-sep"><td colspan="7"></td></tr>
+
+          <tr class="data-row">
+            <td class="day-cell" rowspan="9">Día 2 (Pierna)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="pierna-mc4-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Sentadilla en multipower</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-mc4" placeholder="kg x reps"></td><td>Top set · fuerza</td>
+          </tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-backoff-mc4" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Peso muerto rumano MP</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-mc4" placeholder="kg x reps"></td><td>Top set · fuerza posterior</td></tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-backoff-mc4" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Extensión de cuádriceps</td><td>3</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-extension-cuadriceps-mc4" placeholder="kg x reps"></td><td>Cuádriceps</td></tr>
+          <tr class="data-row"><td class="ex-cell">Femoral tumbado o sentado</td><td>3</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-femoral-tumbado-sentado-mc4" placeholder="kg x reps"></td><td>Femoral</td></tr>
+          <tr class="data-row"><td class="ex-cell">Adductor</td><td>2</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-adductor-mc4" placeholder="kg x reps"></td><td>—</td></tr>
+          <tr class="data-row"><td class="ex-cell">Gemelo (alterna sentado / de pie)</td><td>3</td><td>10-20</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-gemelo-mc4" placeholder="kg x reps"></td><td>Sóleo / gastrocnemio</td></tr>
+          <tr class="data-row"><td class="ex-cell">Pallof press o crunch en polea</td><td>2</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-pallof-press-crunch-polea-mc4" placeholder="kg x reps"></td><td>Core</td></tr>
+          <tr class="day-sep"><td colspan="7"></td></tr>
+
+          <tr class="data-row">
+            <td class="day-cell" rowspan="10">Día 3 (Brazo)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="brazo-mc4-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Press cerrado o fondos en máquina</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-mc4" placeholder="kg x reps"></td><td>Top set · fuerza tríceps</td>
+          </tr>
           <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-backoff-mc4" placeholder="kg x reps"></td><td>Back-off</td></tr>
           <tr class="data-row"><td class="ex-cell">Curl predicador en máquina</td><td>3</td><td>8-10</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-curl-predicador-maquina-mc4" placeholder="kg x reps"></td><td>Bíceps (carga)</td></tr>
           <tr class="data-row"><td class="ex-cell">Extensión tríceps cuerda</td><td>3</td><td>10-12</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-extension-triceps-cuerda-mc4" placeholder="kg x reps"></td><td>—</td></tr>
@@ -522,11 +420,50 @@
     </div>
 
     <div class="micro-table">
-      <div class="micro-title">MICROCICLO 5 <label class="sesion-check"><input type="checkbox" class="sesion" data-key="brazo-mc5-completado"> Completado</label></div>
+      <div class="micro-title">MICROCICLO 5</div>
       <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
+        <thead><tr><th>DÍA</th><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
         <tbody>
-          <tr class="data-row"><td class="ex-cell">Press cerrado o fondos en máquina</td><td>1</td><td>5-6</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-mc5" placeholder="kg x reps"></td><td>Top set · fuerza tríceps</td></tr>
+          <tr class="data-row">
+            <td class="day-cell" rowspan="11">Día 1 (Torso)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="torso-mc5-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Press inclinado MP</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-mc5" placeholder="kg x reps"></td><td>Top set · fuerza pecho (excepción: RIR 1)</td>
+          </tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-backoff-mc5" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Remo máquina Hammer / polea baja</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-mc5" placeholder="kg x reps"></td><td>Top set · fuerza espalda (excepción: RIR 1)</td></tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-backoff-mc5" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Press plano en máquina</td><td>3</td><td>8-10</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-plano-maquina-mc5" placeholder="kg x reps"></td><td>Pecho</td></tr>
+          <tr class="data-row"><td class="ex-cell">Jalón agarre neutro</td><td>3</td><td>8-10</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-jalon-agarre-neutro-mc5" placeholder="kg x reps"></td><td>Espalda</td></tr>
+          <tr class="data-row"><td class="ex-cell">Peck deck</td><td>2</td><td>10-12</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-peck-deck-mc5" placeholder="kg x reps"></td><td>Pecho</td></tr>
+          <tr class="data-row"><td class="ex-cell">Pullover en polea</td><td>2</td><td>10-12</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pullover-polea-mc5" placeholder="kg x reps"></td><td>Dorsal</td></tr>
+          <tr class="data-row"><td class="ex-cell">Elevaciones laterales en polea</td><td>3</td><td>12-15</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-elevaciones-laterales-polea-mc5" placeholder="kg x reps"></td><td>Deltoides lateral</td></tr>
+          <tr class="data-row"><td class="ex-cell">Pájaros / reverse peck deck</td><td>3</td><td>12-15</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pajaros-reverse-peck-deck-mc5" placeholder="kg x reps"></td><td>Deltoides posterior</td></tr>
+          <tr class="data-row"><td class="ex-cell">Press hombro en máquina</td><td>2</td><td>8-10</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-hombro-maquina-mc5" placeholder="kg x reps"></td><td>Opcional · deltoides anterior</td></tr>
+          <tr class="day-sep"><td colspan="7"></td></tr>
+
+          <tr class="data-row">
+            <td class="day-cell" rowspan="9">Día 2 (Pierna)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="pierna-mc5-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Sentadilla en multipower</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-mc5" placeholder="kg x reps"></td><td>Top set · fuerza (excepción: RIR 1)</td>
+          </tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-backoff-mc5" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Peso muerto rumano MP</td><td>1</td><td>5-6</td><td>1</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-mc5" placeholder="kg x reps"></td><td>Top set · fuerza posterior (excepción: RIR 1)</td></tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-backoff-mc5" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Extensión de cuádriceps</td><td>3</td><td>10-12</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-extension-cuadriceps-mc5" placeholder="kg x reps"></td><td>Cuádriceps</td></tr>
+          <tr class="data-row"><td class="ex-cell">Femoral tumbado o sentado</td><td>3</td><td>10-12</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-femoral-tumbado-sentado-mc5" placeholder="kg x reps"></td><td>Femoral</td></tr>
+          <tr class="data-row"><td class="ex-cell">Adductor</td><td>2</td><td>8-10</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-adductor-mc5" placeholder="kg x reps"></td><td>—</td></tr>
+          <tr class="data-row"><td class="ex-cell">Gemelo (alterna sentado / de pie)</td><td>3</td><td>10-20</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-gemelo-mc5" placeholder="kg x reps"></td><td>Sóleo / gastrocnemio</td></tr>
+          <tr class="data-row"><td class="ex-cell">Pallof press o crunch en polea</td><td>2</td><td>10-12</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-pallof-press-crunch-polea-mc5" placeholder="kg x reps"></td><td>Core</td></tr>
+          <tr class="day-sep"><td colspan="7"></td></tr>
+
+          <tr class="data-row">
+            <td class="day-cell" rowspan="10">Día 3 (Brazo)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="brazo-mc5-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Press cerrado o fondos en máquina</td><td>1</td><td>5-6</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-mc5" placeholder="kg x reps"></td><td>Top set · fuerza tríceps</td>
+          </tr>
           <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-backoff-mc5" placeholder="kg x reps"></td><td>Back-off</td></tr>
           <tr class="data-row"><td class="ex-cell">Curl predicador en máquina</td><td>3</td><td>8-10</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-curl-predicador-maquina-mc5" placeholder="kg x reps"></td><td>Bíceps (carga)</td></tr>
           <tr class="data-row"><td class="ex-cell">Extensión tríceps cuerda</td><td>3</td><td>10-12</td><td>0</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-extension-triceps-cuerda-mc5" placeholder="kg x reps"></td><td>—</td></tr>
@@ -541,11 +478,50 @@
     </div>
 
     <div class="micro-table">
-      <div class="micro-title descarga">DESCARGA <label class="sesion-check"><input type="checkbox" class="sesion" data-key="brazo-descarga-completado"> Completado</label></div>
+      <div class="micro-title descarga">DESCARGA</div>
       <table>
-        <thead><tr><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
+        <thead><tr><th>DÍA</th><th>EJERCICIO</th><th>SERIES</th><th>REPES</th><th>RIR</th><th>PESOS X REPS</th><th>NOTAS</th></tr></thead>
         <tbody>
-          <tr class="data-row"><td class="ex-cell">Press cerrado o fondos en máquina</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-descarga" placeholder="kg x reps"></td><td>Top set · fuerza tríceps</td></tr>
+          <tr class="data-row">
+            <td class="day-cell" rowspan="11">Día 1 (Torso)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="torso-descarga-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Press inclinado MP</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-descarga" placeholder="kg x reps"></td><td>Top set · fuerza pecho</td>
+          </tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-inclinado-mp-backoff-descarga" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Remo máquina Hammer / polea baja</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-descarga" placeholder="kg x reps"></td><td>Top set · fuerza espalda</td></tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-remo-maquina-hammer-backoff-descarga" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Press plano en máquina</td><td>3</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-plano-maquina-descarga" placeholder="kg x reps"></td><td>Pecho</td></tr>
+          <tr class="data-row"><td class="ex-cell">Jalón agarre neutro</td><td>3</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-jalon-agarre-neutro-descarga" placeholder="kg x reps"></td><td>Espalda</td></tr>
+          <tr class="data-row"><td class="ex-cell">Peck deck</td><td>2</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-peck-deck-descarga" placeholder="kg x reps"></td><td>Pecho</td></tr>
+          <tr class="data-row"><td class="ex-cell">Pullover en polea</td><td>2</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pullover-polea-descarga" placeholder="kg x reps"></td><td>Dorsal</td></tr>
+          <tr class="data-row"><td class="ex-cell">Elevaciones laterales en polea</td><td>3</td><td>12-15</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-elevaciones-laterales-polea-descarga" placeholder="kg x reps"></td><td>Deltoides lateral</td></tr>
+          <tr class="data-row"><td class="ex-cell">Pájaros / reverse peck deck</td><td>3</td><td>12-15</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-pajaros-reverse-peck-deck-descarga" placeholder="kg x reps"></td><td>Deltoides posterior</td></tr>
+          <tr class="data-row"><td class="ex-cell">Press hombro en máquina</td><td>2</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="torso-press-hombro-maquina-descarga" placeholder="kg x reps"></td><td>Opcional · deltoides anterior</td></tr>
+          <tr class="day-sep"><td colspan="7"></td></tr>
+
+          <tr class="data-row">
+            <td class="day-cell" rowspan="9">Día 2 (Pierna)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="pierna-descarga-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Sentadilla en multipower</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-descarga" placeholder="kg x reps"></td><td>Top set · fuerza</td>
+          </tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-sentadilla-multipower-backoff-descarga" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Peso muerto rumano MP</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-descarga" placeholder="kg x reps"></td><td>Top set · fuerza posterior</td></tr>
+          <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-peso-muerto-rumano-mp-backoff-descarga" placeholder="kg x reps"></td><td>Back-off</td></tr>
+          <tr class="data-row"><td class="ex-cell">Extensión de cuádriceps</td><td>3</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-extension-cuadriceps-descarga" placeholder="kg x reps"></td><td>Cuádriceps</td></tr>
+          <tr class="data-row"><td class="ex-cell">Femoral tumbado o sentado</td><td>3</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-femoral-tumbado-sentado-descarga" placeholder="kg x reps"></td><td>Femoral</td></tr>
+          <tr class="data-row"><td class="ex-cell">Adductor</td><td>2</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-adductor-descarga" placeholder="kg x reps"></td><td>—</td></tr>
+          <tr class="data-row"><td class="ex-cell">Gemelo (alterna sentado / de pie)</td><td>3</td><td>10-20</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-gemelo-descarga" placeholder="kg x reps"></td><td>Sóleo / gastrocnemio</td></tr>
+          <tr class="data-row"><td class="ex-cell">Pallof press o crunch en polea</td><td>2</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="pierna-pallof-press-crunch-polea-descarga" placeholder="kg x reps"></td><td>Core</td></tr>
+          <tr class="day-sep"><td colspan="7"></td></tr>
+
+          <tr class="data-row">
+            <td class="day-cell" rowspan="10">Día 3 (Brazo)
+              <label class="sesion-check"><input type="checkbox" class="sesion" data-key="brazo-descarga-completado"> Completada</label>
+            </td>
+            <td class="ex-cell">Press cerrado o fondos en máquina</td><td>1</td><td>5-6</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-descarga" placeholder="kg x reps"></td><td>Top set · fuerza tríceps</td>
+          </tr>
           <tr class="data-row"><td class="ex-cell">↳ back-off</td><td>1</td><td>6-9</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-press-cerrado-fondos-maquina-backoff-descarga" placeholder="kg x reps"></td><td>Back-off</td></tr>
           <tr class="data-row"><td class="ex-cell">Curl predicador en máquina</td><td>3</td><td>8-10</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-curl-predicador-maquina-descarga" placeholder="kg x reps"></td><td>Bíceps (carga)</td></tr>
           <tr class="data-row"><td class="ex-cell">Extensión tríceps cuerda</td><td>3</td><td>10-12</td><td>2</td><td class="peso-cell"><input class="peso" type="text" data-key="brazo-extension-triceps-cuerda-descarga" placeholder="kg x reps"></td><td>—</td></tr>

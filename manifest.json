@@ -1,0 +1,12 @@
+{
+  "name": "Plan de Romén - Entrenamiento y Nutrición",
+  "short_name": "Plan Romén",
+  "description": "Plan de entrenamiento, nutrición, descanso y recuperación de Romén",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F4F6F7",
+  "theme_color": "#1F4E5C",
+  "lang": "es"
+}
