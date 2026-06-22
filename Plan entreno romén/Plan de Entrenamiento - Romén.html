@@ -108,6 +108,13 @@
   input.peso:focus { outline: 2px solid #fff; background: rgba(255,255,255,.25); }
 
   @media (max-width: 640px) {
+    table.simple { min-width: 0; }
+    table.simple thead { display: none; }
+    table.simple tbody tr { display: block; padding: 10px 14px; }
+    table.simple tbody td { display: block; text-align: left; border: none; padding: 3px 0; }
+    table.simple tbody td::before { content: attr(data-label) ": "; font-weight: 700; color: var(--muted); font-size: 0.68rem; text-transform: uppercase; letter-spacing: .04em; display: block; margin-bottom: 1px; }
+    table.simple tbody td:first-child { font-weight: 700; font-size: 0.95rem; padding-bottom: 6px; }
+    table.simple tbody td:first-child::before { content: none; }
     .micro-table table { min-width: 0; }
     .micro-table thead { display: none; }
     .micro-table tbody tr.data-row { display: block; padding: 12px 14px 14px; }
@@ -777,6 +784,19 @@
     el.addEventListener('change', () => { guardarCampo(el); actualizarProgreso(); });
   });
   cargarProgreso();
+
+  // En móvil, table.simple pasa de tabla horizontal a tarjetas verticales
+  // (ver @media max-width:640px). Esto pone en cada celda la cabecera de su
+  // columna como atributo, para poder mostrarla como etiqueta sin tener que
+  // tocar el HTML de cada tabla.
+  document.querySelectorAll('table.simple').forEach(table => {
+    const headers = Array.from(table.querySelectorAll('thead th')).map(th => th.textContent.trim());
+    table.querySelectorAll('tbody tr').forEach(tr => {
+      Array.from(tr.children).forEach((td, i) => {
+        if (headers[i]) td.setAttribute('data-label', headers[i]);
+      });
+    });
+  });
 
   function exportarProgreso() {
     const data = JSON.stringify(leerAlmacen());
