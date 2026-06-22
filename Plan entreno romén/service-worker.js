@@ -2,7 +2,7 @@
 // Sube CACHE_NAME (ej. "plan-romen-v2") cada vez que cambies
 // el contenido de las páginas para forzar a los dispositivos a descargar
 // la versión nueva.
-const CACHE_NAME = "plan-romen-v6";
+const CACHE_NAME = "plan-romen-v7";
 
 const ARCHIVOS_CACHE = [
   "./",
